@@ -1,0 +1,30 @@
+# Bin�rios e build
+bin/
+obj/
+vs/
+*.exe
+*.dll
+*.pdb
+*.vsidx
+
+# Configura��es do Visual Studio
+.vscode/
+.vs/
+*vsidx
+*.suo
+*.user
+*.sln.cache
+
+# Configura��o do NuGet
+.nuget/
+
+# Arquivos gerados pelo Entity Framework Core
+Migrations/
+
+# Configura��o do Rider/ReSharper
+.idea/
+*.DotSettings.user
+
+# Logs e arquivos tempor�rios
+logs/
+*.log

@@ -1,15 +1,20 @@
+using CrudDapper.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+//This service indicates to the IUserInterface that the implementation is contained on UserService class
+builder.Services.AddScoped<IUserInterface, UserService>();
+
+//Adding Mapper dependency injection in a whole assembly.
+builder.Services.AddAutoMapper(typeof(Program));
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

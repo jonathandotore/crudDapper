@@ -40,5 +40,30 @@ namespace CrudDapper.Services
                 return response;
             }
         }
+
+        public async Task<ResponseModel<ListUserDto>> GetUser(Guid id)
+        {
+            ResponseModel<ListUserDto> response = new ResponseModel<ListUserDto>();
+
+            using (var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                var user = await connection.QueryFirstOrDefaultAsync<Users>($"SELECT * FROM USERS WHERE Id = @Id", new {Id = id});
+
+                if (user == null)
+                {
+                    response.Message = "User not found. Please, check if you provided correct information and try again!";
+                    response.Status = false;
+
+                    return response;
+                }
+
+                var mappedUser = _mapper.Map<ListUserDto>(user);
+
+                response.Data = mappedUser;
+                response.Message = "Success!";
+            }
+
+            return response;
+        }
     }
 }

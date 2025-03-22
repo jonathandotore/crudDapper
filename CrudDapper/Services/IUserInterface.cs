@@ -6,5 +6,6 @@ namespace CrudDapper.Services
     public interface IUserInterface
     {
         Task<ResponseModel<List<ListUserDto>>> GetAllUsers();
+        Task<ResponseModel<ListUserDto>> GetUser(Guid id);
     }
 }

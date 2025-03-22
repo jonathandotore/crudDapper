@@ -25,5 +25,16 @@ namespace CrudDapper.Controllers
             
             return Ok(users);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUser(Guid id)
+        {
+            var user = await _userInterface.GetUser(id);
+
+            if (user == null)
+                return NotFound(user);
+            
+            return Ok(user);
+        }
     }
 }

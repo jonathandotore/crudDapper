@@ -2,9 +2,7 @@
 using CrudDapper.Dto;
 using CrudDapper.Models;
 using Dapper;
-using Newtonsoft.Json;
 using System.Data.SqlClient;
-using System.Xml;
 
 namespace CrudDapper.Services
 {
@@ -82,7 +80,7 @@ namespace CrudDapper.Services
                 FullName = newUser.FullName ?? throw new ArgumentNullException(nameof(newUser.FullName), "Full name is required."),
                 Email = newUser.Email ?? throw new ArgumentNullException(nameof(newUser.Email), "Email is required."),
                 JobTitle = newUser.JobTitle ?? throw new ArgumentNullException(nameof(newUser.JobTitle), "Job title is required."),
-                Salary = (newUser.Salary == null) ? 0.00 : newUser.Salary,
+                Salary = newUser.Salary,
                 Cpf = newUser.Cpf ?? throw new ArgumentNullException(nameof(newUser.Cpf), "CPF is required."),
                 Status = newUser.Status,
                 Password = newUser.Password ?? throw new ArgumentNullException(nameof(newUser.Password), "Password is required.")
@@ -156,6 +154,39 @@ namespace CrudDapper.Services
 
             return response;
 
+        }
+        public async Task<ResponseModel<List<ListUserDto>>> DeleteUser(Guid id)
+        {
+            ResponseModel<List<ListUserDto>> response = new ResponseModel<List<ListUserDto>>();
+
+            using (var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                var deleteUser = await connection.ExecuteAsync(@"DELETE FROM USERS WHERE Id = @Id", new { Id = id});
+
+                if (deleteUser == 0)
+                {
+                    response.Message = "User not found or provided infos are incorrect. Please check it and try again!";
+                    response.Status = false;
+
+                    return response;
+                }
+
+                var usersList = await ListUsers(connection);
+
+                if (usersList == null)
+                {
+                    response.Message = "An error occured during your solicitation, please try again.";
+                    response.Status = false;
+                }
+
+                var mappedUsers = _mapper.Map<List<ListUserDto>>(usersList);
+
+                response.Data = mappedUsers;
+                response.Message = "Success!";
+
+                return response;
+
+            }
         }
 
         private static async Task<IEnumerable<Users>> ListUsers(SqlConnection connection)

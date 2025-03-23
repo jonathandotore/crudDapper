@@ -93,7 +93,7 @@ namespace CrudDapper.Services
                 if (rows == 0)
                     throw new Exception("Error on insert new User");
 
-                var usersDb = await connection.QueryAsync<Users>("SELECT * FROM USERS");
+                var usersDb = await ListUsers(connection);
 
                 if (!usersDb.Any())
                 {
@@ -109,6 +109,10 @@ namespace CrudDapper.Services
             }
 
             return response;
+        }
+        private static async Task<IEnumerable<Users>> ListUsers(SqlConnection connection)
+        {
+            return await connection.QueryAsync<Users>("SELECT * FROM USERS");
         }
     }
 }

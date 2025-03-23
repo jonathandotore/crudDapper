@@ -48,5 +48,16 @@ namespace CrudDapper.Controllers
 
             return Ok(user);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(Guid id, UpdateUserDto userupdateUserDto)
+        {
+            var user = await _userInterface.UpdateUser(id, userupdateUserDto);
+
+            if (user == null)
+                return BadRequest(userupdateUserDto);
+
+            return Ok(user);
+        }
     }
 }

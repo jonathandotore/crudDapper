@@ -2,7 +2,9 @@
 using CrudDapper.Dto;
 using CrudDapper.Models;
 using Dapper;
+using Newtonsoft.Json;
 using System.Data.SqlClient;
+using System.Xml;
 
 namespace CrudDapper.Services
 {
@@ -110,9 +112,59 @@ namespace CrudDapper.Services
 
             return response;
         }
+        public async Task<ResponseModel<ListUserDto>> UpdateUser(Guid id, UpdateUserDto updateUserDto)
+        {
+            var response = new ResponseModel<ListUserDto>();
+
+            if (updateUserDto == null)
+            {
+                response.Message = "The provided data is invalid. Please check it and try again";
+                response.Status = false;
+
+                return response;
+            }
+
+            using (var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                var userDb = await connection.ExecuteAsync(@"UPDATE USERS
+                                                                SET
+                                                                    FullName = @FullName,
+                                                                    Email = @Email,
+                                                                    JobTitle = @JobTitle,
+                                                                    Salary = @Salary,
+                                                                    Cpf = @Cpf,
+                                                                    Status = @Status
+                                                             WHERE Id = @Id", updateUserDto);
+   
+                if (userDb == 0)
+                    throw new Exception("Error on update the specified user");
+
+                var updatedUser = await ListUserById(connection, id);
+
+                if (updatedUser == null)
+                {
+                    response.Message = "User not found!";
+                    response.Status = false;
+                    return response;
+                }
+
+                var mappedUser = _mapper.Map<ListUserDto>(updatedUser);
+
+                response.Data = mappedUser;
+                response.Message = "Success!";
+            }
+
+            return response;
+
+        }
+
         private static async Task<IEnumerable<Users>> ListUsers(SqlConnection connection)
         {
             return await connection.QueryAsync<Users>("SELECT * FROM USERS");
+        }
+        private static async Task<IEnumerable<Users>> ListUserById(SqlConnection connection, Guid id)
+        {
+            return await connection.QueryAsync<Users>(@"SELECT * FROM USERS WHERE Id = @Id", new { Id = id });
         }
     }
 }

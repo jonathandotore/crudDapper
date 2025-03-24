@@ -1,0 +1,43 @@
+<div class="container mt-5">
+    <button class="btn btn-success w-100">Cadastrar novo usuário</button>
+    <div>
+        <label class="form-labal "for="">Pesquisar: </label>
+        <input type="text" class="form-control" placeholder="Digite o nome do usuário que deseja buscar">
+    </div>
+
+    <table class="table table-hoverede table-bordered mt-5">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>JobTitle</th>
+                <th>Salary</th>
+                <th>Cpf</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (users.length > 0)
+            {
+                @for (user of users; track $index)
+                {
+                    <tr>
+                        <td>{{user.id}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.jobTitle}}</td>
+                        <td>{{user.salary}}</td>
+                        <td>{{user.cpf}}</td>
+                        <td>{{user.status == true ? "Active" : "Inactive"}}</td>
+                        <td>
+                            <button class="bnt btn-warning mx-2">Edit</button>
+                            <button class="bnt btn-warning mx-2">Details</button>
+                            <button class="bnt btn-warning mx-2">Delete</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

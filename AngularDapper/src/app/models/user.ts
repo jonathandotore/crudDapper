@@ -1,5 +1,5 @@
 export interface UserList {
-    id?: null,
+    id: string,
     fullName: string,
     email: string,
     jobTitle: string,

@@ -1,27 +1,27 @@
 <div class="container mt-5">
     <h1>New user register</h1>
-    <form>
+    <form [formGroup]="userForm" (ngSubmit)="submit()" #formDit="ngForm">
         <div class="mt-3">
             <label for="" class="form-label mt-3">Full Name</label>
-            <input class="form-control" type="text" name="fullname" id="fullname-form" placeholder="Write a full name">
+            <input class="form-control" type="text" name="fullname" id="fullname-form" placeholder="Write a full name" formControlName="fullName">
 
             <label for="" class="form-label mt-3">E-mail</label>
-            <input class="form-control" type="email" name="email" id="email-form" placeholder="Your best e-mail!">
+            <input class="form-control" type="email" name="email" id="email-form" placeholder="Your best e-mail!" formControlName="email">
 
             <label for="" class="form-label mt-3">Job Title</label>
-            <input class="form-control" type="text" name="jobtitle" id="jobtitle-form" placeholder="What's your job?">
+            <input class="form-control" type="text" name="jobtitle" id="jobtitle-form" placeholder="What's your job?" formControlName="jobTitle">
 
             <label for="" class="form-label mt-3">Salary</label>
-            <input class="form-control" type="number" step="any" id="salary-form" placeholder="Money, money, money ..">
+            <input class="form-control" type="number" step="any" id="salary-form" placeholder="Money, money, money .." formControlName="salary">
 
             <label for="" class="form-label mt-3">CPF</label>
-            <input class="form-control" type="text" name="cpf" id="cpf-form" placeholder="Your CPF, Sir ..">
+            <input class="form-control" type="text" name="cpf" id="cpf-form" placeholder="Your CPF, Sir .." formControlName="cpf">
             
             <label for="" class="form-label mt-3">Password</label>
-            <input class="form-control" type="password" name="password" id="password-form" placeholder="Shh... nobody needs to know">
+            <input class="form-control" type="password" name="password" id="password-form" placeholder="Shh... nobody needs to know" formControlName="password">
 
             <label for="" class="form-label mt-3">Status</label>
-            <select class="form-select" name="status" id="status">
+            <select class="form-select" name="status" id="status" formControlName="status">
                 <optgroup>
                     <option value="true" selected   >Active</option>
                     <option value="false">Inactive</option>
@@ -29,7 +29,7 @@
             </select><br>
 
             <div class="d-flex mt-3">
-                <button class="btn btn-success w-50 mx-1">Register</button>
+                <button class="btn btn-success w-50 mx-1" type="submit">Register</button>
                 <a class="btn btn-info w-50" [routerLink]="['/']">Home</a>
             </div>
         </div>

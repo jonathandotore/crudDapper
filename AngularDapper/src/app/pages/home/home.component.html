@@ -2,13 +2,14 @@
     <button class="btn btn-success w-100">Cadastrar novo usuário</button>
     <div>
         <label class="form-labal "for="">Pesquisar: </label>
-        <input type="text" class="form-control" placeholder="Digite o nome do usuário que deseja buscar">
+        <input type="text" class="form-control" placeholder="Digite o nome do usuário que deseja buscar" (input)="search($event)">
     </div>
 
     <table class="table table-hoverede table-bordered mt-5">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>Id</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>JobTitle</th>
                 <th>Salary</th>
@@ -25,15 +26,15 @@
                 {
                     <tr>
                         <td>{{user.id}}</td>
+                        <td>{{user.fullName}}</td>
                         <td>{{user.email}}</td>
                         <td>{{user.jobTitle}}</td>
                         <td>{{user.salary}}</td>
-                        <td>{{user.cpf}}</td>
                         <td>{{user.status == true ? "Active" : "Inactive"}}</td>
                         <td>
-                            <button class="bnt btn-warning mx-2">Edit</button>
-                            <button class="bnt btn-warning mx-2">Details</button>
-                            <button class="bnt btn-warning mx-2">Delete</button>
+                            <button class="btn btn-warning mx-2">Edit</button>
+                            <button class="btn btn-info mx-2">Details</button>
+                            <button class="btn btn-danger mx-2">Delete</button>
                         </td>
                     </tr>
                 }

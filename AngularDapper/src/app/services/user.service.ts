@@ -14,7 +14,13 @@ export class UserService {
 
   constructor(private http : HttpClient) { }
 
-  GetUsers() : Observable<Response<UserList[]>> {
+  GetUsers() : Observable<Response<UserList[]>>
+  {
     return this.http.get<Response<UserList[]>> (`${this.ApiUrl}User`)
+  }
+
+  DeleteUser(id:string) : Observable<Response<UserList[]>>
+  {
+    return this.http.delete<Response<UserList[]>> (`${this.ApiUrl}User/?id=${id}`);
   }
 }

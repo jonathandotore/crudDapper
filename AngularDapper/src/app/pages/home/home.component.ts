@@ -33,4 +33,12 @@ export class HomeComponent implements OnInit{
       return user.fullName.toLocaleLowerCase().includes(value);
     });
   }
+
+  delete(id:string)
+  {
+    this.userService.DeleteUser(id).subscribe(response => {
+      console.log(response);
+      //window.location.reload();
+    })
+  }
 }

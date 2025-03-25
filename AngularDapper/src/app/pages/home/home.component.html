@@ -34,10 +34,14 @@
                         <td>
                             <button class="btn btn-warning mx-2">Edit</button>
                             <button class="btn btn-info mx-2">Details</button>
-                            <button class="btn btn-danger mx-2">Delete</button>
+                            <button class="btn btn-danger mx-2" (click)="delete(user.id)">Delete</button>
                         </td>
                     </tr>
                 }
+            }
+            @else
+            {
+                <tr class="text-center">Nenhum usuário cadastrado.</tr>
             }
         </tbody>
     </table>

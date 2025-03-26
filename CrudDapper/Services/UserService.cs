@@ -39,9 +39,9 @@ namespace CrudDapper.Services
                 return response;
             }
         }
-        public async Task<ResponseModel<ListUserDto>> GetUser(Guid id)
+        public async Task<ResponseModel<Users>> GetUser(Guid id)
         {
-            ResponseModel<ListUserDto> response = new ResponseModel<ListUserDto>();
+            ResponseModel<Users> response = new ResponseModel<Users>();
 
             using (var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
@@ -55,9 +55,7 @@ namespace CrudDapper.Services
                     return response;
                 }
 
-                var mappedUser = _mapper.Map<ListUserDto>(user);
-
-                response.Data = mappedUser;
+                response.Data = user;
                 response.Message = "Success!";
             }
 

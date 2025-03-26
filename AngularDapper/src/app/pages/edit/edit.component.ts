@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 export class EditComponent {
 
   user!: UserList;
+  btnAction = "Edit";
+  descriptionTitle = "Edit User";
 
 
   constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) { }
@@ -24,6 +26,13 @@ export class EditComponent {
     const id = this.route.snapshot.paramMap.get('id') as string;
 
     this.userService.GetUserById(id).subscribe(response => {
+      this.user = response.data;
+    });
+  }
+
+  editUser(user:UserList)
+  {
+    this.userService.EditUser(user).subscribe(response => {
       this.user = response.data;
     });
   }

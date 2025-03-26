@@ -33,4 +33,9 @@ export class UserService {
   {
     return this.http.get<Response<UserList>> (`${this.ApiUrl}User/${id}`);
   }
+
+  EditUser(user: UserList) : Observable<Response<UserList>>
+  {
+    return this.http.put<Response<UserList>> (`${this.ApiUrl}User`, user, { headers: { 'Content-Type': 'application/json' }, responseType: 'json' });
+  }
 }

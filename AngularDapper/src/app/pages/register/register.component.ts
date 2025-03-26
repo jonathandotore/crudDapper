@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 
 export class RegisterComponent {
 
+  btnAction = "Register";
+  descriptionTitle = "Register new user";
+
   constructor(private userService: UserService, private router: Router) { }
 
   registerUser(user: UserList)

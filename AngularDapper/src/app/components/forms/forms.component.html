@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <h1>New user register</h1>
+    <h1>{{descriptionTitle}}</h1>
     <form [formGroup]="userForm" (ngSubmit)="submit()" #formDir="ngForm">
         <div class="mt-3">
             <label for="" class="form-label mt-3">Full Name</label>
@@ -29,7 +29,7 @@
             </select><br>
 
             <div class="d-flex mt-3">
-                <button class="btn btn-success w-50 mx-1" type="submit">Register</button>
+                <button class="btn btn-success w-50 mx-1" type="submit">{{btnAction}}</button>
                 <a class="btn btn-info w-50" [routerLink]="['/']">Home</a>
             </div>
         </div>

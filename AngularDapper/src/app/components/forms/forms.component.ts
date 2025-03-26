@@ -14,6 +14,8 @@ export class FormsComponent implements OnInit {
 
   @Output() onSubmit = new EventEmitter<UserList>();
   @Input() userData : UserList | null = null;
+  @Input() btnAction!:string;
+  @Input() descriptionTitle!: string;
 
   userForm!: FormGroup;
 

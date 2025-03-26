@@ -26,8 +26,11 @@ export class UserService {
 
   RegisterUser(user: UserList) : Observable<Response<UserList[]>>
   {
-    return this.http.post<Response<UserList[]>> (`${this.ApiUrl}User`,
-                                                    user,
-                                                  { headers: { 'Content-Type': 'application/json' }, responseType: 'json' });
+    return this.http.post<Response<UserList[]>> (`${this.ApiUrl}User`, user, { headers: { 'Content-Type': 'application/json' }, responseType: 'json' });
+  }
+
+  GetUserById(id : string) : Observable<Response<UserList>>
+  {
+    return this.http.get<Response<UserList>> (`${this.ApiUrl}User/${id}`);
   }
 }

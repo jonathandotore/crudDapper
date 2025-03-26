@@ -32,7 +32,7 @@
                         <td>{{user.salary}}</td>
                         <td>{{user.status == true ? "Active" : "Inactive"}}</td>
                         <td>
-                            <button class="btn btn-warning mx-2">Edit</button>
+                            <button class="btn btn-warning mx-2" [routerLink]="['/edit', user.id]">Edit</button>
                             <button class="btn btn-info mx-2">Details</button>
                             <button class="btn btn-danger mx-2" (click)="delete(user.id)">Delete</button>
                         </td>

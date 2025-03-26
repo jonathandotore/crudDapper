@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <h1>User Details</h1>
+    <form>
+        <div class="mt-3">
+            <label for="" class="form-label mt-3">Full Name</label>
+            <input class="form-control" type="text" name="fullname" id="fullname-form" placeholder="Write a full name" value="{{user.fullName}}" disabled>
+
+            <label for="" class="form-label mt-3">E-mail</label>
+            <input class="form-control" type="email" name="email" id="email-form" placeholder="Your best e-mail!" value="{{user.email}}" disabled>
+
+            <label for="" class="form-label mt-3">Job Title</label>
+            <input class="form-control" type="text" name="jobtitle" id="jobtitle-form" placeholder="What's your job?" value="{{user.jobTitle}}" disabled>
+
+            <label for="" class="form-label mt-3">Salary</label>
+            <input class="form-control" type="number" step="any" id="salary-form" placeholder="Money, money, money .." value="{{user.salary}}" disabled>
+
+            <label for="" class="form-label mt-3">CPF</label>
+            <input class="form-control" type="text" name="cpf" id="cpf-form" placeholder="Your CPF, Sir .." value="{{user.cpf}}" disabled>
+            
+            <label for="" class="form-label mt-3">Password</label>
+            <input class="form-control" type="password" name="password" id="password-form" placeholder="Shh... nobody needs to know" value="{{user.password}}" disabled>
+
+            <label for="" class="form-label mt-3">Status</label>
+            <input class="form-select" name="status" id="status" value="{{user.status}}" disabled>
+
+            <div class="d-flex mt-3">
+                <a class="btn btn-info w-50 m-auto" [routerLink]="['/']">Back</a>
+            </div>
+        </div>
+    </form>
+</div>

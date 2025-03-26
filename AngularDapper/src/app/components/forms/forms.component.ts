@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms'
+import { UserList } from '../../models/user';
 
 @Component({
   selector: 'app-forms',
@@ -10,6 +11,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angula
 })
 
 export class FormsComponent implements OnInit {
+
+  @Output() onSubmit = new EventEmitter<UserList>();
 
   userForm!: FormGroup;
 
@@ -27,6 +30,6 @@ export class FormsComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.userForm.value);
+    this.onSubmit.emit(this.userForm.value);
   }
 }

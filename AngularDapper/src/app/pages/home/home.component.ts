@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit{
   {
     this.userService.DeleteUser(id).subscribe(response => {
       console.log(response);
-      //window.location.reload();
+      window.location.reload();
     })
   }
 }

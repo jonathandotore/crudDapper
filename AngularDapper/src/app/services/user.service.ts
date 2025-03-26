@@ -23,4 +23,11 @@ export class UserService {
   {
     return this.http.delete<Response<UserList[]>> (`${this.ApiUrl}User/?id=${id}`);
   }
+
+  RegisterUser(user: UserList) : Observable<Response<UserList[]>>
+  {
+    return this.http.post<Response<UserList[]>> (`${this.ApiUrl}User`,
+                                                    user,
+                                                  { headers: { 'Content-Type': 'application/json' }, responseType: 'json' });
+  }
 }
